@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<svg/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
+
+<script>
+    w = 500
+    h = 500
+    
+    var graph = 
+    {'nodes': [{'color': 'red', 'id': 'http://xmlns.com/foaf/0.1/Person'}, {'color': 'blue', 'id': 'http://xmlns.com/foaf/0.1/interest'}, {'color': 'blue', 'id': 'http://xmlns.com/foaf/0.1/knows'}, {'color': 'blue', 'id': 'http://xmlns.com/foaf/0.1/givenName'}, {'color': 'blue', 'id': 'http://xmlns.com/foaf/0.1/img'}, {'color': 'blue', 'id': 'http://xmlns.com/foaf/0.1/name'}, {'color': 'blue', 'id': 'http://xmlns.com/foaf/0.1/familyName'}, {'color': 'blue', 'id': 'http://xmlns.com/foaf/0.1/age'}, {'color': 'blue', 'id': 'http://www.w3.org/2000/01/rdf-schema#label'}, {'color': 'blue', 'id': 'http://xmlns.com/foaf/0.1/birthday'}, {'color': 'blue', 'id': 'http://xmlns.com/foaf/0.1/homepage'}, {'color': 'blue', 'id': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'}, {'color': 'blue', 'id': 'http://xmlns.com/foaf/0.1/based_near'}], 'links': [{'source': 'http://xmlns.com/foaf/0.1/Person', 'target': 'http://xmlns.com/foaf/0.1/interest'}, {'source': 'http://xmlns.com/foaf/0.1/Person', 'target': 'http://xmlns.com/foaf/0.1/knows'}, {'source': 'http://xmlns.com/foaf/0.1/Person', 'target': 'http://xmlns.com/foaf/0.1/givenName'}, {'source': 'http://xmlns.com/foaf/0.1/Person', 'target': 'http://xmlns.com/foaf/0.1/img'}, {'source': 'http://xmlns.com/foaf/0.1/Person', 'target': 'http://xmlns.com/foaf/0.1/name'}, {'source': 'http://xmlns.com/foaf/0.1/Person', 'target': 'http://xmlns.com/foaf/0.1/familyName'}, {'source': 'http://xmlns.com/foaf/0.1/Person', 'target': 'http://xmlns.com/foaf/0.1/age'}, {'source': 'http://xmlns.com/foaf/0.1/Person', 'target': 'http://www.w3.org/2000/01/rdf-schema#label'}, {'source': 'http://xmlns.com/foaf/0.1/Person', 'target': 'http://xmlns.com/foaf/0.1/birthday'}, {'source': 'http://xmlns.com/foaf/0.1/Person', 'target': 'http://xmlns.com/foaf/0.1/homepage'}, {'source': 'http://xmlns.com/foaf/0.1/Person', 'target': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'}, {'source': 'http://xmlns.com/foaf/0.1/Person', 'target': 'http://xmlns.com/foaf/0.1/based_near'}]}
+    
+    
+    var svg = d3.select("svg")
+        .attr("width", w)
+        .attr("height", h)
+        .attr("style","background: lightgray;");
+        
+    var lines = svg.selectAll("line")
+       .data(graph.links)
+       .enter()
+       .append("line")
+       .attr("x1", function(d) { return d.source.x })
+       .attr("y1", function(d) { return d.source.y })
+       .attr("x2", function(d) { return d.target.x })
+       .attr("y2", function(d) { return d.target.y })
+       .style("stroke", "blue");
+    
+    var circles = svg.selectAll("circle")
+        .data(graph.nodes)
+        .enter()
+        .append("circle")
+        .attr("cx", function(d,i) { return d.x; })
+        .attr("cy", function(d,i) { return d.y; })
+        .attr("r", 10)
+        .attr("fill", "red");
+        
+    var simulation = d3.forceSimulation()
+        .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(100))
+        .force("charge", d3.forceManyBody())
+        .force("center", d3.forceCenter(w / 2, h / 2));
+
+    simulation.nodes(graph.nodes).on("tick", ticked);
+
+    simulation.force("link").links(graph.links);
+
+    function ticked() {
+        lines
+            .attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+    
+        circles
+            .attr("cx", function(d) { return d.x; })
+            .attr("cy", function(d) { return d.y; });
+        }
+
+</script>
