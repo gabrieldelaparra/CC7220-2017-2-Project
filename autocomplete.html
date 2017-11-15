@@ -1,0 +1,29 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+    function getCars() {
+        var url, carOption;
+        url = 'cars.json';
+    
+        $.getJSON(url, function(data) {
+        //populate the cars datalist
+            $(data.osCars).each(function() {
+                carsOption = "<option value=\"" + this.name + "\" \\>";
+                $('#carList').append(carsOption);
+            });
+        });
+    }
+</script>
+
+<input type="text" 
+    maxlength="30" 
+    list="carList" 
+    id="carSearchBox" 
+    name="carSearchBox" 
+    pattern="[A-Za-z '-]*$" 
+    placeholder="search cars" 
+    autofocus autocomplete="on">
+
+<datalist id="carList"></datalist>
+
+<script>window.onload=getCars;</script>
