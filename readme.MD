@@ -8,8 +8,16 @@ La UI debe tener algunos elementos principales:
 
 1. Install
 
-`pip install -r requirements`
+`pip install -r requirements.txt`
 
-2. Correr Jupyter
+2. Install d3networkxx
+
+```bash
+git clone https://github.com/jdfreder/ipython-d3networkx
+cd ipython-d3networkx
+pip install .
+```
+
+3. Correr Jupyter
  
 `jupyter notebook`
