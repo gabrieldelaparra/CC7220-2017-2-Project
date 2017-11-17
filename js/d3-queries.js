@@ -8,7 +8,7 @@ $(function () {
         .attr("height", h);
 
     var borderPath = svg.append("rect")
-        .attr("class", "canvas-border")
+        .attr("id", "canvas-border")
         .attr("x", 0)
         .attr("y", 0)
         .attr("height", h)
@@ -26,13 +26,15 @@ $(function () {
         var link = svg.selectAll(".link")
             .data(graph.links).enter()
             .append("line")
-            .attr("class", "link")
+            .attr("class", "link");
 
         var node = svg.selectAll(".node")
             .data(graph.nodes).enter()
-            .append("circle")
+            .append("circle")          
             .attr("class", "node")
             .attr("fill", function (d) { return d.color; })
+            .attr("stroke-width", 0)
+            .attr("r", 10)
 
         var label = svg.selectAll(".label")
             .data(graph.nodes).enter()
@@ -76,12 +78,12 @@ $(function () {
 
         // ########## Toggle ##########
 
-        node.on("click", toggleSelected)
+        node.on("click", toggleSelected);
 
         function toggleSelected(d) {
             d.isSelected = !d.isSelected;
-            d3.select(this).style("stroke-width", d.isSelected ? 5 : 0);
-        }
+            d3.select(this).attr("stroke-width", d.isSelected ? 5:0);
+        };
 
         // ########## Drag and Drop ##########
 
@@ -94,20 +96,20 @@ $(function () {
             if (!d3.event.active) simulation.alphaTarget(0.3).restart();
             d.fx = d.x;
             d.fy = d.y;
-        }
+        };
 
         function dragged(d) {
             d.fx = d3.event.x;
             d.fy = d3.event.y;
-        }
+        };
 
         function dragended(d) {
             if (!d3.event.active) simulation.alphaTarget(0);
             if (!d.isSelected) {
                 d.fx = null;
                 d.fy = null;
-            }
-        }
+            };
+        };
 
         // ########## Zoom & Pan ##########
 
@@ -125,3 +127,5 @@ $(function () {
 
     });
 });
+
+

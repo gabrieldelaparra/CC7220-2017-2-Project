@@ -1,26 +1,37 @@
-floatbar {
+body{
     position: relative;
+}
+
+
+#floatbar-span {
+    position: absolute;
     z-index: 2;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    left: 0;
+    right: 0;    
+}
+#endpointURL{
+    width: 600px;
 }
 
-.endpoint {
+#canvas-div {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
 }
 
-.canvas-div {
-    margin: 0 auto;
-    z-index: -1;
-}
-
-.canvas-border {
+#canvas-border {
     stroke: black;
     fill: none;
     stroke-width: 1;
 }
 
 .node {
-    r: 10;
-    stroke: "black";
-    stroke-width: 0;
+    stroke: black;
 }
 
 .link {
