@@ -1,1 +1,75 @@
-{"nodes": [{"color": "teal", "label": "Elmer Velasquez", "id": "http://xmlns.com/foaf/0.1/Person"}, {"color": "purple", "id": "http://xmlns.com/foaf/0.1/knows"}, {"color": "purple", "id": "http://ex.org/transitiveKnows"}, {"color": "purple", "id": "http://ex.org/stranger"}, {"color": "purple", "id": "http://ex.org/.transitiveKnows"}, {"color": "purple", "id": "http://ex.org/.stranger"}, {"color": "purple", "id": "http://ex.org/voc#transitiveKnows"}, {"color": "purple", "id": "http://ex.org/voc#transtiveKnows"}, {"color": "purple", "id": "http://ex.org/voc#stranger"}], "links": [{"source": "http://xmlns.com/foaf/0.1/Person", "target": "http://xmlns.com/foaf/0.1/knows"}, {"source": "http://xmlns.com/foaf/0.1/Person", "target": "http://ex.org/transitiveKnows"}, {"source": "http://xmlns.com/foaf/0.1/Person", "target": "http://ex.org/stranger"}, {"source": "http://xmlns.com/foaf/0.1/Person", "target": "http://ex.org/.transitiveKnows"}, {"source": "http://xmlns.com/foaf/0.1/Person", "target": "http://ex.org/.stranger"}, {"source": "http://xmlns.com/foaf/0.1/Person", "target": "http://ex.org/voc#transitiveKnows"}, {"source": "http://xmlns.com/foaf/0.1/Person", "target": "http://ex.org/voc#transtiveKnows"}, {"source": "http://xmlns.com/foaf/0.1/Person", "target": "http://ex.org/voc#stranger"}]}
+{
+    "nodes": [
+        {
+            "color": "teal",
+            "label": "Elmer Velasquez",
+            "id": "http://xmlns.com/foaf/0.1/Person"
+        },
+        {
+            "color": "purple",
+            "id": "http://xmlns.com/foaf/0.1/knows"
+        },
+        {
+            "color": "purple",
+            "id": "http://ex.org/transitiveKnows"
+        },
+        {
+            "color": "purple",
+            "id": "http://ex.org/stranger"
+        },
+        {
+            "color": "purple",
+            "id": "http://ex.org/.transitiveKnows"
+        },
+        {
+            "color": "purple",
+            "id": "http://ex.org/.stranger"
+        },
+        {
+            "color": "purple",
+            "id": "http://ex.org/voc#transitiveKnows"
+        },
+        {
+            "color": "purple",
+            "id": "http://ex.org/voc#transtiveKnows"
+        },
+        {
+            "color": "purple",
+            "id": "http://ex.org/voc#stranger"
+        }
+    ],
+    "links": [
+        {
+            "source": "http://xmlns.com/foaf/0.1/Person",
+            "target": "http://xmlns.com/foaf/0.1/knows"
+        },
+        {
+            "source": "http://xmlns.com/foaf/0.1/Person",
+            "target": "http://ex.org/transitiveKnows"
+        },
+        {
+            "source": "http://xmlns.com/foaf/0.1/Person",
+            "target": "http://ex.org/stranger"
+        },
+        {
+            "source": "http://xmlns.com/foaf/0.1/Person",
+            "target": "http://ex.org/.transitiveKnows"
+        },
+        {
+            "source": "http://xmlns.com/foaf/0.1/Person",
+            "target": "http://ex.org/.stranger"
+        },
+        {
+            "source": "http://xmlns.com/foaf/0.1/Person",
+            "target": "http://ex.org/voc#transitiveKnows"
+        },
+        {
+            "source": "http://xmlns.com/foaf/0.1/Person",
+            "target": "http://ex.org/voc#transtiveKnows"
+        },
+        {
+            "source": "http://xmlns.com/foaf/0.1/Person",
+            "target": "http://ex.org/voc#stranger"
+        }
+    ]
+}
