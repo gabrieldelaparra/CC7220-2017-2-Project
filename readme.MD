@@ -7,7 +7,9 @@ La UI debe tener algunos elementos principales:
 - El canvas de d3 donde se verán los nodos.
 
 1. Install
+
 `pip install -r requirements`
 
 2. Correr Jupyter
+ 
 `jupyter notebook`
