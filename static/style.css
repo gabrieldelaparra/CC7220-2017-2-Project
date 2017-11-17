@@ -1,0 +1,32 @@
+floatbar {
+    position: relative;
+    z-index: 2;
+}
+
+.endpoint {
+}
+
+.canvas-div {
+    margin: 0 auto;
+    z-index: -1;
+}
+
+.canvas-border {
+    stroke: black;
+    fill: none;
+    stroke-width: 1;
+}
+
+.node {
+    r: 10;
+    stroke: "black";
+    stroke-width: 0;
+}
+
+.link {
+    stroke: black;
+}
+
+.label {
+    text-anchor: "middle";
+}
