@@ -128,4 +128,34 @@ $(function () {
     });
 });
 
+String.prototype.replaceAll = function(search, replace)
+{
+    if (replace === undefined) { return this.toString(); }
+    return this.replace(new RegExp('[' + search + ']', 'g'), replace);
+};
+
+function getTypes(url, callback) {
+    var query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?t WHERE { ?s rdf:type ?t } LIMIT 5";
+    query = query.replaceAll(" ","+").replaceAll("#","%23");
+    
+    var queryUrl = (url + "?query=" + query + "&format=json");
+    
+    console.log("query:" +queryUrl)
+    $.ajax({ 
+        dataType: "jsonp",
+        url: queryUrl,
+        success: function (_data) {
+            callback(_data);
+            callback(_data.results.bindings);
+        },
+    });
+};
+
+function consoleLog(json){
+    console.log(json);
+};
+
+function loadEndpointURL(url){
+    getTypes(url.value, consoleLog);
+};
 
