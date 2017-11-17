@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+
+<script>
+    debug = true;
+
+    fetch = function(url, callback) {
+    if (debug) { console.log(url) }
+    var mime = "application/sparql-results+json"
+    d3.xhr(url, mime, function(request) {
+        var json = request
+        if (debug) { console.log(json) }
+        callback(JSON.parse(json))
+    })};
+        
+    query = function(endpoint, sparql, callback) {
+    var url = endpoint + "?query=" + encodeURIComponent(sparql)
+    if (debug) { console.log(endpoint) }
+    fetch(url, callback)
+    }
+        
+    function render(json) {console.log(json);}
+
+    var endpt = "http://sparql.n13.degu.cl/sparql";
+    var qry = "SELECT DISTINCT ?s ?p ?o  WHERE { ?s ?p ?o . } LIMIT 1000";
+        
+    query(endpt, qry, render);
+</script>
+
+</html>
