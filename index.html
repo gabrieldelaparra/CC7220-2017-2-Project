@@ -10,23 +10,21 @@
 </head>
 
 <body>
-    <div class="side-panel">
-        <g id="side-panel-g">
-
+    <div id="side-panel">
     </div>
-        <center>
-            <div class="header">
-                <h1>SPARQL queries for humans</h1>
-            </div>
-            <span id="floatbar-span">
-                <input type="text" id="endpointURL" value="https://sparql.n13.degu.cl/sparql" />
-                <input type="button" value="Go!" onclick="loadEndpointURL(endpointURL)">
-                </button>
-            </span>
-            <div id="canvas-div">
-                <svg id="canvas" />
-            </div>
-        </center>
+    <center>
+        <div class="header">
+            <h1>SPARQL queries for humans</h1>
+        </div>
+        <span id="floatbar-span">
+            <input type="text" id="endpointURL" value="https://sparql.n13.degu.cl/sparql" />
+            <input type="button" value="Go!" onclick="loadEndpointURL(endpointURL)">
+            </button>
+        </span>
+        <div id="canvas-div">
+            <svg id="canvas" />
+        </div>
+    </center>
 </body>
 
 </html>

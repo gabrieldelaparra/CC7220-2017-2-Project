@@ -147,13 +147,35 @@ function getTypes(url, callback) {
     });
 };
 
+function getProperties(url, selected_type, callback) {
+    if (url && selected_type) {
+        var query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?p WHERE { ?s rdf:type <" + selected_type + "> . ?s ?p ?o . } LIMIT 50";
+        query = query.replaceAll(" ", "+").replaceAll("#", "%23");
+        var queryUrl = url + "?query=" + query + "&format=json";
+
+        $.ajax({
+            dataType: "jsonp",
+            url: queryUrl,
+            success: function (_data) {
+                callback(_data.results.bindings);
+            },
+        });
+    }
+};
+
 function createEntityDatalist(json) {
-    d3.select("#side-panel-g")
+
+    d3.select("#side-panel")
+        .append("g")
+        .text("Entity:")
+
+    d3.select("#side-panel")
         .append("input")
+        .attr("id", "selectedEntityInput")
         .attr("type", "text")
         .attr("list", "dlist1")
 
-    datalist = d3.select("#side-panel-g")
+    datalist = d3.select("#side-panel")
         .append("datalist")
         .attr("id", "dlist1")
 
@@ -164,13 +186,59 @@ function createEntityDatalist(json) {
             datalist.append("option").attr("value", res[keys[j]].value);
         }
     }
+
+    d3.select("#side-panel")
+        .append("input")
+        .attr("type", "button")
+        .attr("value", "Add")
+        .attr("onClick", "getProperties(endpointURL.value, selectedEntityInput.value, createPropertyDatalist)");
+
+    d3.select("#side-panel")
+        .append("input")
+        .attr("type", "button")
+        .attr("value", "Run Query")
+        .attr("onClick", "");
+
+    d3.select("#side-panel")
+        .append("br");
 }
 
-function consoleLog(json) {
-    console.log(json);
-};
+function createPropertyDatalist(json) {
+    d3.select("#side-panel")
+        .append("g")
+        .text("Property:")
+
+    d3.select("#side-panel")
+        .append("input")
+        .attr("id", "selectedEntityInput")
+        .attr("type", "text")
+        .attr("list", "dlist2")
+
+    datalist = d3.select("#side-panel")
+        .append("datalist")
+        .attr("id", "dlist2")
+
+    for (var i in json) {
+        var res = json[i];
+        keys = Object.keys(res);
+        for (var j in keys) {
+            datalist.append("option").attr("value", res[keys[j]].value);
+        }
+    }
+
+    d3.select("#side-panel")
+        .append("input")
+        .attr("type", "button")
+        .attr("value", "Add")
+        .attr("onClick", "createPropertyDatalist(selectedEntityInput)");
+
+    d3.select("#side-panel")
+        .append("br");
+}
 
 function loadEndpointURL(url) {
-    getTypes(url.value, createEntityDatalist);
+    if (url.value) {
+        getTypes(url.value, createEntityDatalist);
+    }
 };
 
