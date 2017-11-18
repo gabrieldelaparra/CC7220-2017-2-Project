@@ -30,7 +30,7 @@ $(function () {
 
         var node = svg.selectAll(".node")
             .data(graph.nodes).enter()
-            .append("circle")          
+            .append("circle")
             .attr("class", "node")
             .attr("fill", function (d) { return d.color; })
             .attr("stroke-width", 0)
@@ -82,7 +82,7 @@ $(function () {
 
         function toggleSelected(d) {
             d.isSelected = !d.isSelected;
-            d3.select(this).attr("stroke-width", d.isSelected ? 5:0);
+            d3.select(this).attr("stroke-width", d.isSelected ? 5 : 0);
         };
 
         // ########## Drag and Drop ##########
@@ -128,34 +128,49 @@ $(function () {
     });
 });
 
-String.prototype.replaceAll = function(search, replace)
-{
+String.prototype.replaceAll = function (search, replace) {
     if (replace === undefined) { return this.toString(); }
     return this.replace(new RegExp('[' + search + ']', 'g'), replace);
 };
 
 function getTypes(url, callback) {
-    var query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?t WHERE { ?s rdf:type ?t } LIMIT 5";
-    query = query.replaceAll(" ","+").replaceAll("#","%23");
-    
-    var queryUrl = (url + "?query=" + query + "&format=json");
-    
-    console.log("query:" +queryUrl)
-    $.ajax({ 
+    var query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?t WHERE { ?s rdf:type ?t } LIMIT 50";
+    query = query.replaceAll(" ", "+").replaceAll("#", "%23");
+    var queryUrl = url + "?query=" + query + "&format=json";
+
+    $.ajax({
         dataType: "jsonp",
         url: queryUrl,
         success: function (_data) {
-            callback(_data);
             callback(_data.results.bindings);
         },
     });
 };
 
-function consoleLog(json){
+function createEntityDatalist(json) {
+    d3.select("#side-panel-g")
+        .append("input")
+        .attr("type", "text")
+        .attr("list", "dlist1")
+
+    datalist = d3.select("#side-panel-g")
+        .append("datalist")
+        .attr("id", "dlist1")
+
+    for (var i in json) {
+        var res = json[i];
+        keys = Object.keys(res);
+        for (var j in keys) {
+            datalist.append("option").attr("value", res[keys[j]].value);
+        }
+    }
+}
+
+function consoleLog(json) {
     console.log(json);
 };
 
-function loadEndpointURL(url){
-    getTypes(url.value, consoleLog);
+function loadEndpointURL(url) {
+    getTypes(url.value, createEntityDatalist);
 };
 

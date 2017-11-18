@@ -1,11 +1,11 @@
 body{
     position: relative;
+    background: #eee;
 }
-
 
 #floatbar-span {
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
@@ -17,11 +17,16 @@ body{
 }
 
 #canvas-div {
+    z-index: 2;
     position: absolute;
     margin-left: auto;
     margin-right: auto;
     left: 0;
     right: 0;
+}
+
+#canvas {
+    background: white;
 }
 
 #canvas-border {

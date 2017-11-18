@@ -7,19 +7,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="js/d3-queries.js"></script>
-
 </head>
 
-<center>
 <body>
-    
-        <span id="floatbar-span">
-            <input type="text" id="endpointURL" value="https://sparql.n13.degu.cl/sparql" />
-            <input type="button" value="Go!" onclick="loadEndpointURL(endpointURL)"></button>
-        </span>
-        <div id="canvas-div">
-            <svg id="canvas" />
-        </div>
+    <div class="side-panel">
+        <g id="side-panel-g">
+
+    </div>
+        <center>
+            <div class="header">
+                <h1>SPARQL queries for humans</h1>
+            </div>
+            <span id="floatbar-span">
+                <input type="text" id="endpointURL" value="https://sparql.n13.degu.cl/sparql" />
+                <input type="button" value="Go!" onclick="loadEndpointURL(endpointURL)">
+                </button>
+            </span>
+            <div id="canvas-div">
+                <svg id="canvas" />
+            </div>
+        </center>
 </body>
-</center>
+
 </html>
