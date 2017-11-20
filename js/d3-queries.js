@@ -221,7 +221,7 @@ function getProperties(url, selected_type, callback) {
     }
 };
 
-function runQuery(url, callback) {
+function runQuery(url) {
     obj = 0;
     var query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT * WHERE { ";
     console.log(query);
@@ -286,7 +286,7 @@ function createEntityDatalist() {
         .append("input")
         .attr("type", "button")
         .attr("value", "Run Query")
-        .attr("onClick", "runQuery(endpointURL.value, showResults)");
+        .attr("onClick", "runQuery(endpointURL.value)");
 
     d3.select("#side-panel")
         .append("br");
