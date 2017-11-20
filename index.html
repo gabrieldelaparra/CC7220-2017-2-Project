@@ -1,30 +1,69 @@
 <!DOCTYPE html>
+
 <html>
+
 <meta charset="utf-8">
 
+
 <head>
+
     <link rel="stylesheet" type="text/css" href="static/style.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
     <script src="js/d3-queries.js"></script>
+
+
 </head>
 
+<!--PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+ PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+ SELECT DISTINCT ?t ?l WHERE { ?s rdf:type ?t . OPTIONAL {?s rdfs:label ?l . FILTER(LANG(?l) = "en")}  } LIMIT 50
+ 
+    -->
+<canvas id="canvasSection" width="2000" height="1000">
+</canvas>
+
 <body>
+
     <div id="side-panel">
+
     </div>
+
     <center>
+
         <div class="header">
-            <h1>SPARQL queries UI</h1>
+
+            <h1>SPARQL</h1>
+
+<h2> Queries UI</h2>
         </div>
+
         <span id="floatbar-span">
-            <input type="text" id="endpointURL" value="https://sparql.n13.degu.cl/sparql" />
+
+            <input type="text" id="endpointURL" value="https://dbpedia.org/sparql" />
+
+            <!-- https://dbpedia.org/sparql https://sparql.n13.degu.cl/sparql https://cc7220.dcc.uchile.cl/sparql-->
+
             <input type="button" value="Go!" onclick="loadEndpointURL(endpointURL)">
+
             </button>
+
         </span>
+
         <div id="canvas-div">
+
             <svg id="canvas" />
+
         </div>
+
     </center>
+
 </body>
+
+
+<script src="js/background.js"></script>
 
 </html>
