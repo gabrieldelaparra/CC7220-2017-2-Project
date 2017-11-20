@@ -10,7 +10,7 @@ links = [
 
 graph = { nodes, links };
 
-w = 1200;
+w = 1400;
 h = 800;
 
 function drawForceCanvas() {

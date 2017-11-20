@@ -3,6 +3,13 @@ body{
     background: #eee;
 }
 
+#side-panel {
+    position: absolute;
+    z-index: 3;
+    margin-top: 140px;
+    margin-left: 240px;
+}
+
 #floatbar-span {
     position: absolute;
     z-index: 3;
@@ -17,7 +24,7 @@ body{
 }
 
 #canvas-div {
-    z-index: 2;
+    z-index: 1;
     position: absolute;
     margin-left: auto;
     margin-right: auto;
@@ -45,11 +52,6 @@ body{
 
 .node text {
     text-anchor: "middle";
-}
-
-results {
-    z-index: 4;
-    position: absolute;
 }
 
 #canvasSection{ position:fixed; z-index: -1}
