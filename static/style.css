@@ -35,11 +35,11 @@ body{
     stroke-width: 1;
 }
 
-.node {
+.node circle {
     stroke: black;
 }
 
-.link {
+.link line {
     stroke: black;
 }
 
