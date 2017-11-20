@@ -7,11 +7,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="js/d3-queries.js"></script>
+
 </head>
 <!--PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?t ?l WHERE { ?s rdf:type ?t . OPTIONAL {?s rdfs:label ?l . FILTER(LANG(?l) = "en")}  } LIMIT 50 
     -->
 <body>
-
+    <canvas id="canvasSection" width="2000" height="1000"></canvas>
     <div id="side-panel">
     </div>
     <center>
@@ -30,8 +31,7 @@
         <div id="results">
         </div>
     </center>
-    <canvas width="100%" height="100%">
 </canvas>
 </body>
-
+<script src="js/background.js"></script>
 </html>
