@@ -40,6 +40,13 @@ function drawForceCanvas() {
 }
 
 function redraw() {
+    // Redefine and restart simulation
+    simulation.nodes(graph.nodes)
+        .on("tick", ticked);
+
+    simulation.force("link")
+        .links(graph.links);
+
     // ########## Links and nodes ##########
 
     // Update links
@@ -93,13 +100,6 @@ function redraw() {
 
     // ########## Force ##########
 
-    // Redefine and restart simulation
-    simulation.nodes(graph.nodes)
-        .on("tick", ticked);
-
-    simulation.force("link")
-        .links(graph.links);
-
     function ticked() {
         link
             .attr("x1", function (d) { return d.source.x; })
@@ -118,12 +118,12 @@ function redraw() {
 
     // ########## Toggle ##########
 
-    node.on("click", toggleSelected);
+    // node.on("click", toggleSelected);
 
-    function toggleSelected(d) {
-        d.isSelected = !d.isSelected;
-        d3.select(this).attr("stroke-width", d.isSelected ? 5 : 0);
-    };
+    // function toggleSelected(d) {
+    //     d.isSelected = !d.isSelected;
+    //     d3.select(this).attr("stroke-width", d.isSelected ? 5 : 0);
+    // };
 
     // ########## Drag and Drop ##########
 
@@ -145,10 +145,8 @@ function redraw() {
 
     function dragended(d) {
         if (!d3.event.active) simulation.alphaTarget(0);
-        if (!d.isSelected) {
             d.fx = null;
             d.fy = null;
-        };
     };
 
     // ########## Zoom & Pan ##########
@@ -165,6 +163,8 @@ function redraw() {
         link.attr("transform", d3.event.transform);
         label.attr("transform", d3.event.transform);
     }
+
+    simulation.alpha(0.1).restart();
 }
 
 $(function () {
@@ -221,58 +221,6 @@ function getProperties(url, selected_type, callback) {
     }
 };
 
-function tabulate(data, columns) {
-
-    var table = d3.select("#results").append("table");
-    var thead = table.append('thead')
-    var	tbody = table.append('tbody');
-
-    // append the header row
-    thead.append('tr')
-      .selectAll('th')
-      .data(columns).enter()
-      .append('th')
-        .text(function (column) { return column; });
-
-    // create a row for each object in the data
-    var rows = tbody.selectAll('tr')
-      .data(data)
-      .enter()
-      .append('tr');
-
-    // create a cell in each row for each column
-    var cells = rows.selectAll('td')
-      .data(function (row) {
-        return columns.map(function (column) {
-          return {column: column, value: row[column].value};
-        });
-      })
-      .enter()
-      .append('td')
-        .text(function (d) { return d.value; });
-
-  return table;
-}
-
-function showResults() {
-    console.log(JSON.stringify(queryResults));
-
-    var columns = []
-    for (var i in queryResults) {
-        var res = queryResults[i];
-        keys = Object.keys(res);
-        for (var j in keys) {
-            columns.push(keys[j]);
-        }
-        break;
-    }
-    console.log(columns);
-
-    tabulate(queryResults, columns);
-}
-
-queryResults = [];
-
 function runQuery(url, callback) {
     obj = 0;
     var query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT * WHERE { ";
@@ -295,15 +243,6 @@ function runQuery(url, callback) {
     var queryUrl = url + "?query=" + query + "&format=text/html";
 
     window.location = queryUrl;
-
-    // $.ajax({
-    //     dataType: "jsonp",
-    //     url: queryUrl,
-    //     success: function (_data) {
-    //         queryResults = _data.results.bindings;
-    //         callback();
-    //     },
-    // });
 }
 
 entityCount = 0;
