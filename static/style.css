@@ -47,9 +47,9 @@ body{
     text-anchor: "middle";
 }
 
-results{
+results {
     z-index: 4;
     position: absolute;
 }
 
-#canvasSection{ position:fixed;}
+#canvasSection{ position:fixed; z-index: -1}
