@@ -43,6 +43,11 @@ body{
     stroke: black;
 }
 
-.label {
+.node text {
     text-anchor: "middle";
+}
+
+results{
+    z-index: 4;
+    position: absolute;
 }

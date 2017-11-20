@@ -181,9 +181,11 @@ String.prototype.replaceAll = function (search, replace) {
 entityList = [];
 propertyList = [];
 
+// "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#> PREFIX wd: <http://www.wikidata.org/entity/> PREFIX wdt: <http://www.wikidata.org/prop/direct/> SELECT DISTINCT ?t WHERE { ?s (rdf:type|wdt:P279|wdt:P31) ?t . OPTIONAL {?t rdfs:label ?l . FILTER(langMatches(LANG(?l) = 'en'))} } LIMIT 500";
+// "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?t WHERE { ?s rdf:type ?t .} LIMIT 50";
 // ########## Get Types ##########
 function getTypes(url, callback) {
-    var query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?t WHERE { ?s rdf:type ?t } LIMIT 50";
+    var query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?t WHERE { ?s rdf:type ?t .} LIMIT 50";
     query = query.replaceAll(" ", "+").replaceAll("#", "%23");
     var queryUrl = url + "?query=" + query + "&format=json";
 
@@ -219,14 +221,60 @@ function getProperties(url, selected_type, callback) {
     }
 };
 
-function showResults(){
+function tabulate(data, columns) {
+
+    var table = d3.select("#results").append("table");
+    var thead = table.append('thead')
+    var	tbody = table.append('tbody');
+
+    // append the header row
+    thead.append('tr')
+      .selectAll('th')
+      .data(columns).enter()
+      .append('th')
+        .text(function (column) { return column; });
+
+    // create a row for each object in the data
+    var rows = tbody.selectAll('tr')
+      .data(data)
+      .enter()
+      .append('tr');
+
+    // create a cell in each row for each column
+    var cells = rows.selectAll('td')
+      .data(function (row) {
+        return columns.map(function (column) {
+          return {column: column, value: row[column].value};
+        });
+      })
+      .enter()
+      .append('td')
+        .text(function (d) { return d.value; });
+
+  return table;
+}
+
+function showResults() {
     console.log(JSON.stringify(queryResults));
+
+    var columns = []
+    for (var i in queryResults) {
+        var res = queryResults[i];
+        keys = Object.keys(res);
+        for (var j in keys) {
+            columns.push(keys[j]);
+        }
+        break;
+    }
+    console.log(columns);
+
+    tabulate(queryResults, columns);
 }
 
 queryResults = [];
 
 function runQuery(url, callback) {
-    obj = 0;    
+    obj = 0;
     var query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT * WHERE { ";
     console.log(query);
     for (var i = 0; i < graph.nodes.length; i++) {
@@ -238,22 +286,24 @@ function runQuery(url, callback) {
         }
         if (n.nodeType == "P") {
             obj = obj + 1;
-            query =  query +"?s <" + n.id + "> ?o"+obj+" ."
+            query = query + "?s <" + n.id + "> ?o" + obj + " ."
         }
     }
     query = query + " }"
 
     query = query.replaceAll(" ", "+").replaceAll("#", "%23");
-    var queryUrl = url + "?query=" + query + "&format=json";
+    var queryUrl = url + "?query=" + query + "&format=text/html";
 
-    $.ajax({
-        dataType: "jsonp",
-        url: queryUrl,
-        success: function (_data) {
-            queryResults = _data.results.bindings;
-            callback();
-        },
-    });
+    window.location = queryUrl;
+
+    // $.ajax({
+    //     dataType: "jsonp",
+    //     url: queryUrl,
+    //     success: function (_data) {
+    //         queryResults = _data.results.bindings;
+    //         callback();
+    //     },
+    // });
 }
 
 entityCount = 0;
@@ -280,7 +330,10 @@ function createEntityDatalist() {
         var res = entityList[i];
         keys = Object.keys(res);
         for (var j in keys) {
-            datalist.append("option").attr("value", res[keys[j]].value);
+            option = datalist.append("option").attr("value", res["t"].value)
+            if (res.hasOwnProperty("l")) {
+                option.attr("label", res["l"].value);
+            }
         }
     }
 
