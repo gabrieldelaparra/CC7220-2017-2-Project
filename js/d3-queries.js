@@ -10,8 +10,9 @@ links = [
 
 graph = { nodes, links };
 
- w = 1200;
-h = 600;
+
+w = 1400;
+h = 800;
 
 function drawForceCanvas() {
 
@@ -329,12 +330,11 @@ function createPropertyDatalist() {
         .append("br");
 
     propertyCount = propertyCount + 1;
-}
 
-function addPropertyCallback(propertyValue) {
+  function addPropertyCallback(propertyValue) {
     addNewProperty(propertyValue);
     createPropertyDatalist()
-}
+  }
 
 // ########## Load Endpoint ##########
 function loadEndpointURL(url) {
@@ -360,4 +360,5 @@ function addNewProperty(propertyName) {
     graph.links.push(l);
 
     redraw();
+
 }

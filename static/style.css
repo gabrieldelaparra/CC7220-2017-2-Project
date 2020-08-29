@@ -14,7 +14,14 @@ body{
 }
 
 
-#side-panel { color: #2F4F4F;
+#side-panel {
+    position: absolute;
+    z-index: 3;
+    margin-top: 140px;
+    margin-left: 240px;
+}
+
+#floatbar-span {
     position: absolute;
     z-index: 3;
     font-family: 'Helvetica Neue', sans-serif; font-size: 15px;  font-weight: bold;  margin-top: 140px;
@@ -60,8 +67,7 @@ body{
 
 .
 	node circle {
-    stroke: black;
-}
+
 
 .link line {
     stroke: #708090;
@@ -74,4 +80,5 @@ body{
 
 
 #canvasSection{ position:fixed; z-index: -1}
+
 
