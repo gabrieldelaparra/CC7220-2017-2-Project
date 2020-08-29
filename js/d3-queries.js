@@ -10,6 +10,7 @@ links = [
 
 graph = { nodes, links };
 
+
 w = 1400;
 h = 800;
 
@@ -77,7 +78,7 @@ function redraw() {
     nodeEnter = node
         .enter()
         .append("circle")
-        .attr("fill", function (d) { return d.nodeType == "E" ? "purple" : "teal"; })
+        .attr("fill", function (d) { return d.nodeType == "E" ? 	"orchid" : 	"lightSkyBlue"; })
         .attr("stroke-width", 0)
         .attr("r", 10);
 
@@ -329,12 +330,11 @@ function createPropertyDatalist() {
         .append("br");
 
     propertyCount = propertyCount + 1;
-}
 
-function addPropertyCallback(propertyValue) {
+  function addPropertyCallback(propertyValue) {
     addNewProperty(propertyValue);
     createPropertyDatalist()
-}
+  }
 
 // ########## Load Endpoint ##########
 function loadEndpointURL(url) {
@@ -360,4 +360,5 @@ function addNewProperty(propertyName) {
     graph.links.push(l);
 
     redraw();
+
 }

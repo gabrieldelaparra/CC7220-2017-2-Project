@@ -1,7 +1,18 @@
+h1 { color: #2F4F4F; font-family: 'Helvetica Neue', sans-serif; font-size: 45px; font-weight: bold; letter-spacing: -1px; line-height: 1; margin: 0 0 5px; text-align: center; }
+
+
+h2 { color: #778899; font-family: 'Open Sans', sans-serif; font-size: 25px; font-weight: bold; line-height: 32px; margin: 0 0 3px; text-align: center; }
+
+
+p { color: #685206; font-family: 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 24px; margin: 0 0 24px; text-align: justify; text-justify: inter-word; }
+
+
+
 body{
     position: relative;
     background: #eee;
 }
+
 
 #side-panel {
     position: absolute;
@@ -13,15 +24,25 @@ body{
 #floatbar-span {
     position: absolute;
     z-index: 3;
-    margin-left: auto;
+    font-family: 'Helvetica Neue', sans-serif; font-size: 15px;  font-weight: bold;  margin-top: 140px;
+    margin-left: 90px;
+}
+
+
+#floatbar-span { color: #2F4F4F;
+    position: absolute;
+    z-index: 3;
+    font-family: 'Helvetica Neue', sans-serif; font-size: 15px;  font-weight: bold; margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
     left: 0;
     right: 0;    
 }
+
 #endpointURL{
-    width: 600px;
+    font-family: 'Helvetica Neue', sans-serif; font-size: 15px;  width: 600px;
 }
+
 
 #canvas-div {
     z-index: 1;
@@ -32,26 +53,32 @@ body{
     right: 0;
 }
 
+
 #canvas {
-    background: white;
+    background: GhostWhite;
 }
+
 
 #canvas-border {
-    stroke: black;
+    stroke: #708090;
     fill: none;
-    stroke-width: 1;
+    stroke-width: 3;
 }
 
-.node circle {
-    stroke: black;
-}
+.
+	node circle {
+
 
 .link line {
-    stroke: black;
+    stroke: #708090;
 }
 
-.node text {
-    text-anchor: "middle";
+.
+	node text {
+  font-family: 'Helvetica Neue', sans-serif;  text-anchor: "middle";
 }
+
 
 #canvasSection{ position:fixed; z-index: -1}
+
+
